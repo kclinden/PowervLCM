@@ -9,9 +9,6 @@ function Get-vLCMDatacenter {
     .PARAMETER Id
     The id of the Datacenter
 
-    .PARAMETER Name
-    The name of the Datacenter
-
     .PARAMETER Limit
     The number of entries returned per page from the API. This has a default value of 100.
 
@@ -20,7 +17,6 @@ function Get-vLCMDatacenter {
 
     .INPUTS
     System.String
-    System.Int
 
     .OUTPUTS
     System.Management.Automation.PSObject
@@ -28,9 +24,6 @@ function Get-vLCMDatacenter {
 
     .EXAMPLE
     Get-vLCMDatacenter -Id 6da4b2a20c6b127557662cd1c8ff8
-
-    .EXAMPLE
-    Get-vLCMDatacenter -Name Datacenter1
 
     .EXAMPLE
     Get-vLCMDatacenter
@@ -43,10 +36,6 @@ function Get-vLCMDatacenter {
     [parameter(Mandatory=$true,ParameterSetName="ById")]
     [ValidateNotNullOrEmpty()]
     [String[]]$Id,
-
-    [parameter(Mandatory=$true,ParameterSetName="ByName")]
-    [ValidateNotNullOrEmpty()]
-    [String[]]$Name,
 
     [parameter(Mandatory=$false,ParameterSetName="Standard")]
     [ValidateNotNullOrEmpty()]
@@ -87,48 +76,6 @@ function Get-vLCMDatacenter {
                         city = $Response.city
                         latitude = $Response.latitude
                         longitude = $Response.longitude
-
-                    }
-
-                }
-
-                break
-
-            }
-
-            'ByName' {
-
-                foreach ($DatacenterName in $Name) {
-
-                    $URI = "/Datacenter-service/api/Datacenters?`$filter=name%20eq%20'$($DatacenterName)'"
-
-                    Write-Verbose -Message "Preparing GET to $($URI)"
-
-                    $Response = Invoke-vLCMRestMethod -Method GET -URI "$($URI)"
-
-                    Write-Verbose -Message "SUCCESS"
-
-                    if ($Response.content.Count -eq 0) {
-
-                        throw "Could not find Datacenter $($DatacenterName)"
-
-                    }
-
-                    [pscustomobject] @{
-
-                        CreatedDate = $Response.content.createdDate
-                        LastUpdated = $Response.content.lastUpdated
-                        Version = $Response.content.version
-                        Id = $Response.content.id
-                        Name = $Response.content.name
-                        DatacenterTypeId = $Response.content.DatacenterTypeId
-                        TenantId = $Response.content.tenantId
-                        SubTenantId = $Response.content.subtenantId
-                        Enabled = $Response.content.enabled
-                        Priority = $Response.content.Priority
-                        DatacenterPolicyId = $Response.content.DatacenterPolicyId
-                        AlertPolicy = $Response.content.alertPolicy
-                        ExtensionData = $Response.content.extensionData
 
                     }
 
