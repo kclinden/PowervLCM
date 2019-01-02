@@ -21,3 +21,15 @@ Connect to the LifeCycle Manager Server
 ```PowerShell
 Connect-vLCMServer -Server lcm.domain.local -Credential (get-credential)
 ```
+
+Invoke a LCM REST API to get all datacenters
+```PowerShell
+Invoke-vLCMRestMethod -Method GET -URI "/lcm/api/v1/view/datacenter"
+```
+
+Invoke a LCM REST API to get a specific datacenter
+```PowerShell
+$datacenters = Invoke-vLCMRestMethod -Method GET -URI "/lcm/api/v1/view/datacenter"
+$datacenter = $datacenters[0]
+Invoke-vLCMRestMethod -Method GET -URI "/lcm/api/v1/view/datacenter/?datacenterId=$($datacenter.id)"
+```
