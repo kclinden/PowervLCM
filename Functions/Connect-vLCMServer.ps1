@@ -23,7 +23,6 @@ function Connect-vLCMServer {
 
     .PARAMETER SslProtocol
     Alternative Ssl protocol to use from the default
-    Requires vRA 7.x and above
     Windows PowerShell: Ssl3, Tls, Tls11, Tls12
     PowerShell Core: Tls, Tls11, Tls12
 
