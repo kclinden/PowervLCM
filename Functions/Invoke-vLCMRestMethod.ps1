@@ -33,9 +33,11 @@ function Invoke-vLCMRestMethod {
     System.Management.Automation.PSObject
 
     .EXAMPLE
+    The following commnad can be used to invoke a specific LCM REST API.
     Invoke-vLCMRestMethod -Method GET -URI '/lcm/api/v1/view/datacenter'
 -
     .EXAMPLE
+    The following example creates a new LCM datacenter by submitted a JSON object to the REST API.
     $JSON = @"
       {
         "datacenterName": "CHICAGO_DATA_CENTER",

@@ -1,10 +1,10 @@
 function Get-vLCMDatacenter {
 <#
     .SYNOPSIS
-    Get a Datacenter
+    Get dacenter(s) from vRealize Lifecycle Manager
 
     .DESCRIPTION
-    Get a Datacenter
+    Get all datacenters or a single datacenter by ID.
 
     .PARAMETER Id
     The id of the Datacenter
@@ -30,14 +30,6 @@ function Get-vLCMDatacenter {
     [parameter(Mandatory=$true,ParameterSetName="ById")]
     [ValidateNotNullOrEmpty()]
     [String[]]$Id,
-
-    [parameter(Mandatory=$false,ParameterSetName="Standard")]
-    [ValidateNotNullOrEmpty()]
-    [Int]$Limit = "100",
-
-    [parameter(Mandatory=$false,ParameterSetName="Standard")]
-    [ValidateNotNullOrEmpty()]
-    [Int]$Page = "1"
 
     )
 
@@ -85,19 +77,6 @@ function Get-vLCMDatacenter {
 
                 # --- Make the first request to determine the size of the request
                 $Response = Invoke-vLCMRestMethod -Method GET -URI $URI
-
-                # if (!$PSBoundParameters.ContainsKey("Page")){
-                #
-                #     # --- Get every page back
-                #     $TotalPages = $Response.metadata.totalPages.ToInt32($null)
-                #
-                # }
-                # else {
-                #
-                #     # --- Set TotalPages to 1
-                #     $TotalPages = 1
-                #
-                # }
 
                 # --- Initialise an empty array
                 $ResponseObject = @()
