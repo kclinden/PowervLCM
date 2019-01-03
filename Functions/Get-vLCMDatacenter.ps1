@@ -9,12 +9,6 @@ function Get-vLCMDatacenter {
     .PARAMETER Id
     The id of the Datacenter
 
-    .PARAMETER Limit
-    The number of entries returned per page from the API. This has a default value of 100.
-
-    .PARAMETER Page
-    The page of response to return. All pages are retuend by default
-
     .INPUTS
     System.String
 
@@ -108,45 +102,20 @@ function Get-vLCMDatacenter {
                 # --- Initialise an empty array
                 $ResponseObject = @()
 
-                while ($true){
+                    Write-Verbose -Message "Response contains $($Response.Count) records"
 
-                    #Write-Verbose -Message "Getting response for page $($Page) of $($Response.metadata.totalPages)"
-
-                    #$PagedUri = "$($URI)&page=$($Page)&`$orderby=name%20asc"
-
-                    #Write-Verbose -Message "GET : $($PagedUri)"
-
-                    #$Response = Invoke-vLCMRestMethod -Method GET -URI $PagedUri
-
-                    Write-Verbose -Message "Response contains $($Response.content.Count) records"
-
-                    foreach ($Datacenter in $Response.content) {
-
+                    foreach ($Datacenter in $Response) {
+                        Write-Verbose -Message "Creating object for datacenter $Datacenter.Name"
                         $Object = [pscustomobject] @{
 
-                          datacenterName = $Response.DatacenterName
-                          vCenters = $Response.vCenters
-                          city = $Response.city
-                          latitude = $Response.latitude
-                          longitude = $Response.longitude
+                          Name = $Datacenter.Name
+                          ID = $Datacenter.Id
 
                         }
 
                         $ResponseObject += $Object
 
                     }
-
-                    # --- Break loop
-                    #if ($Page -ge $TotalPages) {
-
-                    #    break
-
-                    #}
-
-                    # --- Increment the current page by 1
-                    #$Page++
-
-                }
 
                 # --- Return Datacenters
                 $ResponseObject
