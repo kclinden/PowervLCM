@@ -14,7 +14,6 @@ function Get-vLCMDatacenter {
 
     .OUTPUTS
     System.Management.Automation.PSObject
-    System.Object[]
 
     .EXAMPLE
     Get-vLCMDatacenter -Id 6da4b2a20c6b127557662cd1c8ff8
@@ -23,7 +22,7 @@ function Get-vLCMDatacenter {
     Get-vLCMDatacenter
 
 #>
-[CmdletBinding(DefaultParameterSetName="List")][OutputType('System.Management.Automation.PSObject', 'System.Object[]')]
+[CmdletBinding(DefaultParameterSetName="Standard")][OutputType('System.Management.Automation.PSObject', 'System.Object[]')]
 
     Param (
 
@@ -57,11 +56,11 @@ function Get-vLCMDatacenter {
 
                     [pscustomobject] @{
 
-                        datacenterName = $Response.DatacenterName
-                        #vCenters = $Response.vCenters
-                        city = $Response.city
-                        latitude = $Response.latitude
-                        longitude = $Response.longitude
+                        DatacenterName = $Response.DatacenterName
+                        ID = $DatacenterId
+                        City = $Response.city
+                        Latitude = $Response.latitude
+                        Longitude = $Response.longitude
 
                     }
 
@@ -71,30 +70,30 @@ function Get-vLCMDatacenter {
 
             }
 
-            'List' {
-
+            'Standard' {
+                #URL for getting all datacenter list
                 $allURI = "/lcm/api/v1/view/datacenter"
-                $detailURI = "/lcm/api/v1/view/datacenter?datacenterId=$($Datacenter.id)"
 
                 # --- Make the first request to get all datacenter IDs
                 $Response = Invoke-vLCMRestMethod -Method GET -URI $allURI
+                Write-Verbose -Message "Response contains $($Response.Count) datacemter records"
 
                 # --- Initialise an empty array
                 $ResponseObject = @()
-
-                    Write-Verbose -Message "Response contains $($Response.Count) datacemter records"
-
+                    #Loop over each datacenter in the list and get detailed view to create new object
                     foreach ($Datacenter in $Response) {
                         #Get the detailed view of each datacenter
+                        $detailURI = "/lcm/api/v1/view/datacenter?datacenterId=$($Datacenter.id)"
+                        Write-Verbose -Message "Getting datacenter details for $Datacenter.name via $($detailURI)"
                         $DetailResponse = Invoke-vLCMRestMethod -Method GET -URI $detailURI
 
                         $Object = [pscustomobject] @{
 
-                          datacenterName = $DetailResponse.DatacenterName
-                          #vCenters = $DetailResponse.vCenters
-                          city = $DetailResponse.city
-                          latitude = $DetailResponse.latitude
-                          longitude = $DetailResponse.longitude
+                          DatacenterName = $DetailResponse.DatacenterName
+                          ID = $Datacenter.id #ID only exists on list view, so it must be retrieved from $datacenter instead of $detailresponse
+                          City = $DetailResponse.city
+                          Latitude = $DetailResponse.latitude
+                          Longitude = $DetailResponse.longitude
 
                         }
 
