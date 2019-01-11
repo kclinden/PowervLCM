@@ -48,7 +48,7 @@ function Get-vLCMContent {
 
                 foreach ($ContentId in $Id) {
 
-                    $URI = "/cms/api/v1/content/$($Content.id)"
+                    $URI = "/cms/api/v1/content/$($ContentId)"
 
                     Write-Verbose -Message "Preparing GET to $($URI)"
 
@@ -93,9 +93,8 @@ function Get-vLCMContent {
                 # --- Initialise an empty array
                 $ResponseObject = @()
                     #Loop over each Content in the list and get detailed view to create new object
-                    foreach ($Content in $Response) {
+                    foreach ($detailedURI in $Response.sortedDocuments.id) {
                         #Get the detailed view of each Content
-                        $detailURI = "/cms/api/v1/content/$($Content.id)"
                         Write-Verbose -Message "Getting Content details for $Content.name via $($detailURI)"
                         $DetailResponse = Invoke-vLCMRestMethod -Method GET -URI $detailURI
 
@@ -110,7 +109,7 @@ function Get-vLCMContent {
                           Path = $DetailResponse.id
                           LatestVersion = $DetailResponse.LatestVersion
                           ReleaseableVersion = $DetailResponse.releasableVersion
-                          
+
                         }
 
                         $ResponseObject += $Object
