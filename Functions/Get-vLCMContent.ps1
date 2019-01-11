@@ -20,11 +20,11 @@ function Get-vLCMContent {
 
     .EXAMPLE
     Get contnt by content id
-    Get-vLCMContent -Id 6da4b2a20c6b127557662cd1c8ff8
+    Get-vLCMContent -Id 4e87ae12-75c8-4a8d-83ab-f02d30543a08
 
     .EXAMPLE
-    Get all content
-    Get-vLCMContent
+    Get all content and display in a table format
+    Get-vLCMContent | ft
 
     .EXAMPLE
     Get
@@ -64,15 +64,15 @@ function Get-vLCMContent {
 
                     [pscustomobject] @{
 
-                        ContentName = $Response.name
-                        ID = $ContentId
-                        UniqueId = $Response.uniqueId
-                        Type = $Response.packageType
-                        RequestedBy = $Response.requestedBy
-                        Tags = $Response.tags
-                        Path = $Response.id
-                        LatestVersion = $Response.LatestVersion
-                        ReleaseableVersion = $Response.releasableVersion
+                      ContentName = $DetailResponse.name
+                      UniqueId = $DetailResponse.uniqueId
+                      ID = $detailURI.split('/')[5]
+                      Type = $DetailResponse.packageType
+                      RequestedBy = $DetailResponse.requestedBy
+                      Tags = $DetailResponse.tags
+                      Path = $DetailResponse.id
+                      LatestVersion = $DetailResponse.LatestVersion
+                      ReleaseableVersion = $DetailResponse.releasableVersion
 
                     }
 
@@ -101,8 +101,8 @@ function Get-vLCMContent {
                         $Object = [pscustomobject] @{
 
                           ContentName = $DetailResponse.name
-                          ID = $Content.Id
                           UniqueId = $DetailResponse.uniqueId
+                          ID = $detailURI.split('/')[5]
                           Type = $DetailResponse.packageType
                           RequestedBy = $DetailResponse.requestedBy
                           Tags = $DetailResponse.tags
