@@ -26,9 +26,6 @@ function Get-vLCMContent {
     Get all content and display in a table format
     Get-vLCMContent | ft
 
-    .EXAMPLE
-    Get
-
 #>
 [CmdletBinding(DefaultParameterSetName="Standard")][OutputType('System.Management.Automation.PSObject', 'System.Object[]')]
 
