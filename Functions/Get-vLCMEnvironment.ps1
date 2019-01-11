@@ -40,7 +40,7 @@ function Get-vLCMEnvironment {
 
                 foreach ($EnvironmentId in $Id) {
 
-                    $URI = "/lcm/api/v1/view/Environment?EnvironmentId=$($EnvironmentId)"
+                    $URI = "//lcm/api/v1/view/environment?environmentId=$($EnvironmentId)"
 
                     Write-Verbose -Message "Preparing GET to $($URI)"
 
@@ -71,7 +71,7 @@ function Get-vLCMEnvironment {
 
             'Standard' {
                 #URL for getting all Environment list
-                $allURI = "/lcm/api/v1/view/Environment"
+                $allURI = "/lcm/api/v1/view/environment"
 
                 # --- Make the first request to get all Environment IDs
                 $Response = Invoke-vLCMRestMethod -Method GET -URI $allURI
@@ -82,7 +82,7 @@ function Get-vLCMEnvironment {
                     #Loop over each Environment in the list and get detailed view to create new object
                     foreach ($Environment in $Response) {
                         #Get the detailed view of each Environment
-                        $detailURI = "/lcm/api/v1/view/Environment?EnvironmentId=$($Environment.id)"
+                        $detailURI = "/lcm/api/v1/view/environment?environmentId=$($Environment.id)"
                         Write-Verbose -Message "Getting Environment details for $Environment.name via $($detailURI)"
                         $DetailResponse = Invoke-vLCMRestMethod -Method GET -URI $detailURI
 
