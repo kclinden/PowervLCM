@@ -48,7 +48,7 @@ function Get-vLCMContent {
 
                 foreach ($ContentId in $Id) {
 
-                    $URI = "/lcm/api/v1/view/Content?ContentId=$($ContentId)"
+                    $URI = "/cms/api/v1/content/$($Content.id)"
 
                     Write-Verbose -Message "Preparing GET to $($URI)"
 
@@ -64,11 +64,15 @@ function Get-vLCMContent {
 
                     [pscustomobject] @{
 
-                        ContentName = $Response.ContentName
+                        ContentName = $Response.name
                         ID = $ContentId
-                        City = $Response.city
-                        Latitude = $Response.latitude
-                        Longitude = $Response.longitude
+                        UniqueId = $Response.uniqueId
+                        Type = $Response.packageType
+                        RequestedBy = $Response.requestedBy
+                        Tags = $Response.tags
+                        Path = $Response.id
+                        LatestVersion = $Response.LatestVersion
+                        ReleaseableVersion = $Response.releasableVersion
 
                     }
 
@@ -80,29 +84,33 @@ function Get-vLCMContent {
 
             'Standard' {
                 #URL for getting all Content list
-                $allURI = "/cms/api/v1/content"
+                $allURI = "/cms/api/v1/content?expands=true" # change expands to parameter after testing
 
                 # --- Make the first request to get all Content IDs
                 $Response = Invoke-vLCMRestMethod -Method GET -URI $allURI
-                Write-Verbose -Message "Response contains $($Response.Count) datacemter records"
+                Write-Verbose -Message "Response contains $($Response.Count) content records"
 
                 # --- Initialise an empty array
                 $ResponseObject = @()
                     #Loop over each Content in the list and get detailed view to create new object
                     foreach ($Content in $Response) {
                         #Get the detailed view of each Content
-                        $detailURI = "/lcm/api/v1/view/Content?ContentId=$($Content.id)"
+                        $detailURI = "/cms/api/v1/content/$($Content.id)"
                         Write-Verbose -Message "Getting Content details for $Content.name via $($detailURI)"
                         $DetailResponse = Invoke-vLCMRestMethod -Method GET -URI $detailURI
 
                         $Object = [pscustomobject] @{
 
-                          ContentName = $DetailResponse.ContentName
-                          ID = $Content.id #ID only exists on list view, so it must be retrieved from $Content instead of $detailresponse
-                          City = $DetailResponse.city
-                          Latitude = $DetailResponse.latitude
-                          Longitude = $DetailResponse.longitude
-
+                          ContentName = $DetailResponse.name
+                          ID = $Content.Id
+                          UniqueId = $DetailResponse.uniqueId
+                          Type = $DetailResponse.packageType
+                          RequestedBy = $DetailResponse.requestedBy
+                          Tags = $DetailResponse.tags
+                          Path = $DetailResponse.id
+                          LatestVersion = $DetailResponse.LatestVersion
+                          ReleaseableVersion = $DetailResponse.releasableVersion
+                          
                         }
 
                         $ResponseObject += $Object
