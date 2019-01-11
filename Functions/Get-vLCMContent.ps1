@@ -93,7 +93,7 @@ function Get-vLCMContent {
                 # --- Initialise an empty array
                 $ResponseObject = @()
                     #Loop over each Content in the list and get detailed view to create new object
-                    foreach ($detailedURI in $Response.sortedDocuments.id) {
+                    foreach ($detailURI in $Response.sortedDocuments.id) {
                         #Get the detailed view of each Content
                         Write-Verbose -Message "Getting Content details for $Content.name via $($detailURI)"
                         $DetailResponse = Invoke-vLCMRestMethod -Method GET -URI $detailURI
