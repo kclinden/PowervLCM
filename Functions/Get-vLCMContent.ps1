@@ -9,7 +9,10 @@ function Get-vLCMContent {
     .PARAMETER Id
     The id of the Content
 
-    .INPUTSf
+    .PARAMETER Type
+    The content type to
+
+    .INPUTS
     System.String
 
     .OUTPUTS
@@ -20,7 +23,7 @@ function Get-vLCMContent {
     Get-vLCMContent -Id 6da4b2a20c6b127557662cd1c8ff8
 
     .EXAMPLE
-    Get all content 
+    Get all content
     Get-vLCMContent
 
     .EXAMPLE
@@ -77,7 +80,7 @@ function Get-vLCMContent {
 
             'Standard' {
                 #URL for getting all Content list
-                $allURI = "/lcm/api/v1/view/Content"
+                $allURI = "/cms/api/v1/content"
 
                 # --- Make the first request to get all Content IDs
                 $Response = Invoke-vLCMRestMethod -Method GET -URI $allURI

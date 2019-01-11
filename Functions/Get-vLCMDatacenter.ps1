@@ -76,7 +76,7 @@ function Get-vLCMDatacenter {
 
                 # --- Make the first request to get all datacenter IDs
                 $Response = Invoke-vLCMRestMethod -Method GET -URI $allURI
-                Write-Verbose -Message "Response contains $($Response.Count) datacemter records"
+                Write-Verbose -Message "Response contains $($Response.Count) datacenter records"
 
                 # --- Initialise an empty array
                 $ResponseObject = @()
