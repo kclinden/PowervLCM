@@ -17,6 +17,9 @@ ModuleVersion = '0.0.1'
 # Supported PSEditions
 # CompatiblePSEditions = @()
 
+# ID used to uniquely identify this module
+GUID = '70e87fa4-456f-4f64-9a10-2645e511ddcd'
+
 # Author of this module
 Author = 'Kasey Linden'
 

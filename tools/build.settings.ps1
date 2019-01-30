@@ -9,7 +9,7 @@ Properties {
     $ModuleName = "PowervLCM"
     $ModuleAuthor = "kclinden"
     $ReleaseDirectoryPath = "$($ENV:BHProjectPath)\Release\$($ModuleName)"
-    $ModuleManifestVersion = "0.0.1"
+    $ModuleManifestVersion = "0.0.0"
 
 # ----------------- Script Analyzer ------------------------------
     # Should be Warning by default. Can be overridden on demand by using
