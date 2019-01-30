@@ -1,9 +1,14 @@
 @{
     ExcludeRules=@(
         "PSAvoidUsingUserNameAndPassWordParams",
-        "PSAvoidGlobalVars"
+        "PSAvoidGlobalVars",
+        "PSUseBOMForUnicodeEncodedFile",
+        "PSAvoidUsingCmdletAliases",
+        "PSAvoidUsingWriteHost",
+        "PSUseDeclaredVarsMoreThanAssignments",
+        "PSAvoidUsingEmptyCatchBlock"
     )
-    
+
     Severity=@(
         "Warning",
         "Error"
