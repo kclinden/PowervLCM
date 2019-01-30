@@ -54,7 +54,7 @@ function Connect-vLCMServer {
         [ValidateNotNullOrEmpty()]
         [String]$Username,
 
-        [parameter(Mandatory=$true,ParameterSetName="Password")]
+        [parameter(Mandatory=$true,ParameterSetName="Username")]
         [ValidateNotNullOrEmpty()]
         [SecureString]$Password,
 
