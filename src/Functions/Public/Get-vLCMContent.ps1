@@ -9,8 +9,11 @@ function Get-vLCMContent {
     .PARAMETER Id
     The id of the Content
 
+    .PARAMETER PackageType
+    The content type to get
+
     .PARAMETER Type
-    The content type to
+    The content type to filter
 
     .INPUTS
     System.String
@@ -31,12 +34,9 @@ function Get-vLCMContent {
 
     Param (
 
-      [parameter(Mandatory=$false,ValueFromPipeline=$false)]
-      [Switch]$ExtendedProperties,
-
-      [parameter(Mandatory=$false,ValueFromPipeline=$false)]
-      [ValidateNotNullOrEmpty()]
-      [String]$Limit = "100"
+      [Parameter(Mandatory=$false)]
+      [ValidateSet("Automation-CompositeBlueprint","Automation-ComponentProfile","Automation-PropertyDefinition","Automation-PropertyGroup","Automation-ResourceAction","Automation-Software","Automation-Subscription","Automation-XaaSBlueprint")]
+      [String]$PackageType
 
     )
 
