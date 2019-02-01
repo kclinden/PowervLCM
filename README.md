@@ -63,5 +63,5 @@ The default build will run some quick tests to catch any errors before you push 
 Documentation for each command can be viewed with Get-Help, e.g.:
 
 ```
-Get-Help Get-vLCMEntitlement
+Get-Help Get-vLCMContent
 ```
