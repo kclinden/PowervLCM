@@ -27,13 +27,6 @@ Connect to a vLCM Server and generate a connection object with Servername, Token
 Connect-vLCMServer -Server vlcmappliance01.domain.local -Credential (Get-Credential)
 ```
 
-### EXAMPLE 2
-```
-$cred = Get-Credential
-```
-
-Connect-vLCMServer -Server vlcmappliance01.domain.local -Credential $cred -IgnoreCertRequirements
-
 ## PARAMETERS
 
 ### -Server

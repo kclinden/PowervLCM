@@ -38,9 +38,6 @@ function Connect-vLCMServer {
     .EXAMPLE
     Connect-vLCMServer -Server vlcmappliance01.domain.local -Credential (Get-Credential)
 
-    .EXAMPLE
-    $cred = Get-Credential
-    Connect-vLCMServer -Server vlcmappliance01.domain.local -Credential $cred -IgnoreCertRequirements
 #>
     [CmdletBinding(DefaultParametersetName = "Username")][OutputType('System.Management.Automation.PSObject')]
 
