@@ -16,8 +16,10 @@ function Remove-vLCMContentItem {
     System.Management.Automation.PSObject
 
     .EXAMPLE
-    Remove-vLCMContent -ContentId a50d0992-bf12-424e-8a4c-a502dba422bb
+    Remove-vLCMContentItem -ContentId a50d0992-bf12-424e-8a4c-a502dba422bb
 
+    .EXAMPLE
+    Get-vLCMContentItem | Remove-vLCMContentItem
 
 #>
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "High")]

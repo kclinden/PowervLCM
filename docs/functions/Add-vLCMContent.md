@@ -16,17 +16,13 @@ Captures a new content item via the vRealize Lifecycle Manager content managemen
 
 ### EXAMPLE 1
 ```
-Get contnt by content id
-```
-
 Add-vLCMContent -Id 4e87ae12-75c8-4a8d-83ab-f02d30543a08
+```
 
 ### EXAMPLE 2
 ```
-Get all content and display in a table format
-```
-
 Add-vLCMContent | ft
+```
 
 ## PARAMETERS
 

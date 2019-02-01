@@ -16,17 +16,13 @@ Get all content or a single content by ID.
 
 ### EXAMPLE 1
 ```
-Get contnt by content id
-```
-
 Get-vLCMContent -Id 4e87ae12-75c8-4a8d-83ab-f02d30543a08
+```
 
 ### EXAMPLE 2
 ```
-Get all content and display in a table format
+Get-vLCMContent -PackageType Automation-CompositeBlueprint
 ```
-
-Get-vLCMContent | ft
 
 ## PARAMETERS
 

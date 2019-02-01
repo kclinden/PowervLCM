@@ -16,10 +16,13 @@ Remove a content item from vRealize Lifecycle Manager content management service
 
 ### EXAMPLE 1
 ```
-Remove content by content id
+Remove-vLCMContentItem -ContentId a50d0992-bf12-424e-8a4c-a502dba422bb
 ```
 
-Remove-vLCMContent -ContentId a50d0992-bf12-424e-8a4c-a502dba422bb
+### EXAMPLE 2
+```
+Get-vLCMContentItem | Remove-vLCMContentItem
+```
 
 ## PARAMETERS
 

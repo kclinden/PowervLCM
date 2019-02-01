@@ -30,19 +30,17 @@ Wrapper for Invoke-RestMethod/Invoke-WebRequest with vLCM specifics
 
 ### EXAMPLE 1
 ```
-The following commnad can be used to invoke a specific LCM REST API.
+Invoke-vLCMRestMethod -Method GET -URI '/lcm/api/v1/view/datacenter'
 ```
 
-Invoke-vLCMRestMethod -Method GET -URI '/lcm/api/v1/view/datacenter'
 -
 
 ### EXAMPLE 2
 ```
-The following example creates a new LCM datacenter by submitted a JSON object to the REST API.
+$JSON = @"
 ```
 
-$JSON = @"
-  {
+{
     "datacenterName": "CHICAGO_DATA_CENTER",
     "city": "Chicago",
     "country": "US",

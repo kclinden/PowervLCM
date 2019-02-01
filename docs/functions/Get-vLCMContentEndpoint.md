@@ -16,17 +16,13 @@ Get all content endpoints or a single content by ID.
 
 ### EXAMPLE 1
 ```
-Get content by content id
-```
-
 Get-vLCMContentEndpoint -Category SourceControl
+```
 
 ### EXAMPLE 2
 ```
-Get all content and display in a table format
-```
-
 Get-vLCMContentEndpoint | ft
+```
 
 ## PARAMETERS
 

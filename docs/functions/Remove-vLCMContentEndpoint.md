@@ -16,10 +16,8 @@ Remove a content endpoint from vRealize Lifecycle Manager content management ser
 
 ### EXAMPLE 1
 ```
-Remove content by content id
-```
-
 Remove-vLCMContentEndpoint -EndpointId a50d0992-bf12-424e-8a4c-a502dba422bb
+```
 
 ## PARAMETERS
 
