@@ -65,3 +65,5 @@ Documentation for each command can be viewed with Get-Help, e.g.:
 ```
 Get-Help Get-vLCMContent
 ```
+
+Alternatively check out our [Read the Docs site](https://powervlcm.readthedocs.org/en/latest/)
