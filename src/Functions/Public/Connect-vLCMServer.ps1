@@ -33,14 +33,14 @@ function Connect-vLCMServer {
     Switch
 
     .OUTPUTS
-    System.Management.Automation.PSObject.
+    System.Management.Automation.PSObject
 
     .EXAMPLE
     Connect-vLCMServer -Server vlcmappliance01.domain.local -Credential (Get-Credential)
 
     .EXAMPLE
-    $SecurePassword = ConvertTo-SecureString “P@ssword” -AsPlainText -Force
-    Connect-vLCMServer -Server vlcmappliance01.domain.local -Username admin@localhost -Password $SecurePassword -IgnoreCertRequirements
+    $cred = Get-Credential
+    Connect-vLCMServer -Server vlcmappliance01.domain.local -Credential $cred -IgnoreCertRequirements
 #>
 [CmdletBinding(DefaultParametersetName="Username")][OutputType('System.Management.Automation.PSObject')]
 

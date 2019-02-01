@@ -5,10 +5,10 @@
 Properties {
 
 # ----------------- General -------------------------------------
-    $DocsDirectory = "$ENV:BHProjectPath\docs"
+    $DocsDirectory = "$ENV:BHProjectPath/docs"
     $ModuleName = "PowervLCM"
     $ModuleAuthor = "kclinden"
-    $ReleaseDirectoryPath = "$($ENV:BHProjectPath)\Release\$($ModuleName)"
+    $ReleaseDirectoryPath = "$($ENV:BHProjectPath)/Release/$($ModuleName)"
     $ModuleManifestVersion = "0.0.0"
 
 # ----------------- Script Analyzer ------------------------------
@@ -16,7 +16,7 @@ Properties {
     # !PSSAError in your commit message
     [ValidateSet('Error', 'Warning', 'Any', 'None')]
     $ScriptAnalysisFailBuildOnSeverityLevel = 'Warning'
-    $ScriptAnalyzerSettingsPath = "$PSScriptRoot\PSScriptAnalyzerSettings.psd1"
+    $ScriptAnalyzerSettingsPath = "$PSScriptRoot/PSScriptAnalyzerSettings.psd1"
 
 # ----------------- GitHub ---------------------------------------
     $OrgName = "kclinden"
