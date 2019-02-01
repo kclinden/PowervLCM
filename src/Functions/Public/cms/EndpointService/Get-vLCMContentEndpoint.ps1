@@ -67,7 +67,7 @@ function Get-vLCMContentEndpoint {
 
             if($PSBoundParameters.ContainsKey('Category')){
                 #URL for getting all Content Endpoints list by category
-                $contentUrl = "/cms/api/v1/endpoints?expands&limit=$($Limit)"
+                $contentUrl = "/cms/api/v1/endpoints?expands&limit=$($Limit)&category=$($Category)"
             }
             else {
                 #URL for getting all Content Endpoints list
