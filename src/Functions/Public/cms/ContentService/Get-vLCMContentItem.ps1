@@ -51,12 +51,13 @@ function Get-vLCMContentItem {
 
           Name          =   $contentItem.name
           UniqueID      =   $contentItem.UniqueID
-          Id            =   $contentItem.id
+          Id            =   ($contentItem.id).split('/')[5]
           PackageType   =   $contentItem.PackageType
           Releasable    =   $contentItem.releasable
           RequestedBy   =   $contentItem.requestedBy
           LatestVersion =   $contentItem.latestVersion
           Tags          =   $contentItem.tags
+          URL           =   $contentItem.id
 
         }
       }

@@ -1,0 +1,23 @@
+---
+
+site_name: PowervLCM
+repo_url: https://github.com/kclinden/PowervLCM
+site_author: kclinden
+edit_uri: edit/master/docs/
+theme: readthedocs
+copyright: "PowervLCM is licensed under the <a href='https://github.com/kclinden/PowervLCM/raw/master/LICENSE'>MIT license"
+pages:
+- 'Home' : 'index.md'
+- 'Change log' : 'CHANGELOG.md'
+- 'Build' : 'build.md'
+- 'Functions': 
+    - Add-vLCMContent : functions/Add-vLCMContent.md
+    - Connect-vLCMServer : functions/Connect-vLCMServer.md
+    - Disconnect-vLCMServer : functions/Disconnect-vLCMServer.md
+    - Get-vLCMContentEndpoint : functions/Get-vLCMContentEndpoint.md
+    - Get-vLCMContentItem : functions/Get-vLCMContentItem.md
+    - Get-vLCMDatacenter : functions/Get-vLCMDatacenter.md
+    - Get-vLCMEnvironment : functions/Get-vLCMEnvironment.md
+    - Invoke-vLCMRestMethod : functions/Invoke-vLCMRestMethod.md
+    - Remove-vLCMContentEndpoint : functions/Remove-vLCMContentEndpoint.md
+    - Remove-vLCMContentItem : functions/Remove-vLCMContentItem.md
