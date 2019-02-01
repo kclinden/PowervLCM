@@ -19,11 +19,9 @@ function Get-vLCMContentEndpoint {
     System.Management.Automation.PSObject
 
     .EXAMPLE
-    Get content by content id
     Get-vLCMContentEndpoint -Category SourceControl
 
     .EXAMPLE
-    Get all content and display in a table format
     Get-vLCMContentEndpoint | ft
 
 #>

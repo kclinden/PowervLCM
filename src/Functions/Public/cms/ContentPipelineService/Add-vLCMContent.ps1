@@ -34,11 +34,9 @@ function Add-vLCMContent {
     System.Management.Automation.PSObject
 
     .EXAMPLE
-    Get contnt by content id
     Add-vLCMContent -Id 4e87ae12-75c8-4a8d-83ab-f02d30543a08
 
     .EXAMPLE
-    Get all content and display in a table format
     Add-vLCMContent | ft
 
 #>

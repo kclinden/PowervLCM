@@ -16,7 +16,6 @@ function Remove-vLCMContentEndpoint {
     System.Management.Automation.PSObject
 
     .EXAMPLE
-    Remove content by content id
     Remove-vLCMContentEndpoint -EndpointId a50d0992-bf12-424e-8a4c-a502dba422bb
 
 
