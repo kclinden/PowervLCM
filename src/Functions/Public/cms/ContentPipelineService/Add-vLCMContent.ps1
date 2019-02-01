@@ -62,12 +62,13 @@ function Add-vLCMContent {
     process{
 
         try {
+          if($PSCmdlet.ShouldProcess($newContent.name)){ #this needs to be modified
 
             #URL for getting all Content list
             $contentUrl = "/cms/api/v1/content?expands=true" # change expands to parameter after testing
 
             # --- Make the first request to get all Content IDs
-            $Response = Invoke-vLCMRestMethod -Method GET -URI $contentUrl
+            $Response = Invoke-vLCMRestMethod -Method POST -URI $contentUrl
             Write-Verbose -Message "Response contains $($Response.Count) content records"
 
             # --- Initialise an empty array
@@ -82,6 +83,8 @@ function Add-vLCMContent {
             # --- Return Contents
             return $ResponseObject
             break
+
+          }
 
         }
 

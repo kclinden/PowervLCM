@@ -12,7 +12,7 @@ function Disconnect-vLCMServer {
     .EXAMPLE
     Disconnect-vLCMServer -Confirm:$false
 #>
-[CmdletBinding(SupportsShouldProcess,ConfirmImpact="High")]
+[CmdletBinding(SupportsShouldProcess,ConfirmImpact="Low")]
 
     Param ()
 
