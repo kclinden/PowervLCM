@@ -1,7 +1,7 @@
-function Get-vLCMContent {
+function Get-vLCMContentItem {
 <#
     .SYNOPSIS
-    Get content from vRealize Lifecycle Manager content management service
+    Get content item from vRealize Lifecycle Manager content management service
 
     .DESCRIPTION
     Get all content or a single content by ID.

@@ -69,7 +69,7 @@ Description = 'PowerShell Module for managing VMware vRealize Suite Lifecycle Ma
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @('Add-vLCMContent','Get-vLCMContent','Get-vLCMContentEndpoint','Remove-vLCMContentEndpoint','Connect-vLCMServer','Get-vLCMDatacenter','Disconnect-vLCMServer','Get-vLCMEnvironment','Invoke-vLCMRestMethod')
+FunctionsToExport = @('Add-vLCMContent','Get-vLCMContentItem','Remove-vLCMContentItem','Get-vLCMContentEndpoint','Remove-vLCMContentEndpoint','Connect-vLCMServer','Get-vLCMDatacenter','Disconnect-vLCMServer','Get-vLCMEnvironment','Invoke-vLCMRestMethod')
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
