@@ -19,7 +19,7 @@ function Get-vLCMContentEndpoint {
     System.Management.Automation.PSObject
 
     .EXAMPLE
-    Get contnt by content id
+    Get content by content id
     Get-vLCMContentEndpoint -Category SourceControl
 
     .EXAMPLE
@@ -31,7 +31,7 @@ function Get-vLCMContentEndpoint {
 
     Param (
 
-      [Parameter(Mandatory=$false)]
+      [Parameter(Mandatory=$false,ValueFromPipeline=$false)]
       [ValidateSet("Orchestration","Automation","SourceControl","Operations")]
       [String]$Category,
 
@@ -55,7 +55,8 @@ function Get-vLCMContentEndpoint {
           Capture       =   $contentItem.supportCapture
           Test          =   $contentItem.supportTest
           Release       =   $contentItem.supportRelease
-          Id            =   $contentItem.id
+          Id            =   ($contentItem.id).split('/')[5]
+          URL           =   $contentItme.id
           Tags          =   $contentItem.tags
 
         }
@@ -74,7 +75,7 @@ function Get-vLCMContentEndpoint {
                 $contentUrl = "/cms/api/v1/endpoints?expands&limit=$($Limit)"
             }
 
-            # --- Make the first request to get all Content IDs
+            # --- Invoke the request to get the content endpoints
             $Response = Invoke-vLCMRestMethod -Method GET -URI $contentUrl
             Write-Verbose -Message "Response contains $($Response.count) content endpoint records"
 
@@ -88,7 +89,7 @@ function Get-vLCMContentEndpoint {
                 }
 
             # --- Return Contents
-            $ResponseObject
+            return $ResponseObject
             break
 
         }
