@@ -56,8 +56,9 @@ function Get-vLCMContentEndpoint {
           Test          =   $contentItem.supportTest
           Release       =   $contentItem.supportRelease
           Id            =   ($contentItem.id).split('/')[5]
-          URL           =   $contentItme.id
+          URL           =   $contentItem.id
           Tags          =   $contentItem.tags
+          Messages      =   $contentItem.messages
 
         }
       }
