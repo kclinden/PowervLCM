@@ -1,5 +1,5 @@
 function Disconnect-vLCMServer {
-<#
+    <#
     .SYNOPSIS
     Disconnect from a vLCM server
 
@@ -12,17 +12,17 @@ function Disconnect-vLCMServer {
     .EXAMPLE
     Disconnect-vLCMServer -Confirm:$false
 #>
-[CmdletBinding(SupportsShouldProcess,ConfirmImpact="Low")]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = "Low")]
 
     Param ()
 
     # --- Test for existing connection to vLCM
-    if (-not $Global:vLCMConnection){
+    if (-not $Global:vLCMConnection) {
 
         throw "vLCM Connection variable does not exist. Please run Connect-vLCMServer first to create it"
     }
 
-    if ($PSCmdlet.ShouldProcess($Global:vLCMConnection.Server)){
+    if ($PSCmdlet.ShouldProcess($Global:vLCMConnection.Server)) {
 
         try {
 
@@ -31,7 +31,7 @@ function Disconnect-vLCMServer {
             Invoke-vLCMRestMethod -Method POST -URI $URI -Verbose:$VerbosePreference
 
             # --- Remove custom Security Protocol if it has been specified
-            if ($Global:vLCMConnection.SslProtocol -ne 'Default'){
+            if ($Global:vLCMConnection.SslProtocol -ne 'Default') {
 
                 if (!$IsCoreCLR) {
 
@@ -40,7 +40,7 @@ function Disconnect-vLCMServer {
             }
 
         }
-        catch [Exception]{
+        catch [Exception] {
 
             throw
 

@@ -1,5 +1,5 @@
 function Invoke-vLCMRestMethod {
-<#
+    <#
     .SYNOPSIS
     Wrapper for Invoke-RestMethod/Invoke-WebRequest with vLCM specifics
 
@@ -51,44 +51,44 @@ function Invoke-vLCMRestMethod {
 
     Invoke-vLCMRestMethod -Method PUT -URI '/lcm/api/v1/view/datacenter' -Body $JSON -WebRequest
 #>
-[CmdletBinding(DefaultParameterSetName="Standard")][OutputType('System.Management.Automation.PSObject')]
+    [CmdletBinding(DefaultParameterSetName = "Standard")][OutputType('System.Management.Automation.PSObject')]
 
     Param (
 
-        [Parameter(Mandatory=$true, ParameterSetName="Standard")]
-        [Parameter(Mandatory=$true, ParameterSetName="Body")]
-        [Parameter(Mandatory=$true, ParameterSetName="OutFile")]
-        [ValidateSet("GET","POST","PUT","DELETE")]
+        [Parameter(Mandatory = $true, ParameterSetName = "Standard")]
+        [Parameter(Mandatory = $true, ParameterSetName = "Body")]
+        [Parameter(Mandatory = $true, ParameterSetName = "OutFile")]
+        [ValidateSet("GET", "POST", "PUT", "DELETE")]
         [String]$Method,
 
-        [Parameter(Mandatory=$true, ParameterSetName="Standard")]
-        [Parameter(Mandatory=$true, ParameterSetName="Body")]
-        [Parameter(Mandatory=$true, ParameterSetName="OutFile")]
+        [Parameter(Mandatory = $true, ParameterSetName = "Standard")]
+        [Parameter(Mandatory = $true, ParameterSetName = "Body")]
+        [Parameter(Mandatory = $true, ParameterSetName = "OutFile")]
         [ValidateNotNullOrEmpty()]
         [String]$URI,
 
-        [Parameter(Mandatory=$false, ParameterSetName="Standard")]
-        [Parameter(Mandatory=$false, ParameterSetName="Body")]
-        [Parameter(Mandatory=$false, ParameterSetName="OutFile")]
+        [Parameter(Mandatory = $false, ParameterSetName = "Standard")]
+        [Parameter(Mandatory = $false, ParameterSetName = "Body")]
+        [Parameter(Mandatory = $false, ParameterSetName = "OutFile")]
         [ValidateNotNullOrEmpty()]
         [System.Collections.IDictionary]$Headers,
 
-        [Parameter(Mandatory=$false, ParameterSetName="Body")]
+        [Parameter(Mandatory = $false, ParameterSetName = "Body")]
         [ValidateNotNullOrEmpty()]
         [String]$Body,
 
-        [Parameter(Mandatory=$false, ParameterSetName="OutFile")]
+        [Parameter(Mandatory = $false, ParameterSetName = "OutFile")]
         [ValidateNotNullOrEmpty()]
         [String]$OutFile,
 
-        [Parameter(Mandatory=$false, ParameterSetName="Standard")]
-        [Parameter(Mandatory=$false, ParameterSetName="Body")]
-        [Parameter(Mandatory=$false, ParameterSetName="OutFile")]
+        [Parameter(Mandatory = $false, ParameterSetName = "Standard")]
+        [Parameter(Mandatory = $false, ParameterSetName = "Body")]
+        [Parameter(Mandatory = $false, ParameterSetName = "OutFile")]
         [Switch]$WebRequest
     )
 
     # --- Test for existing connection to vLCM
-    if (-not $Global:vLCMConnection){
+    if (-not $Global:vLCMConnection) {
 
         throw "vLCM Connection variable does not exist. Please run Connect-vLCMServer first to create it"
     }
@@ -97,12 +97,12 @@ function Invoke-vLCMRestMethod {
     $FullURI = "$($Global:vLCMConnection.Server)$($URI)"
 
     # --- Add default headers if not passed
-    if (!$PSBoundParameters.ContainsKey("Headers")){
+    if (!$PSBoundParameters.ContainsKey("Headers")) {
 
         $Headers = @{
 
-            "Accept"="application/json";
-            "Content-Type" = "application/json";
+            "Accept"             = "application/json";
+            "Content-Type"       = "application/json";
             "x-xenon-auth-token" = "$($Global:vLCMConnection.Token)";
         }
     }
@@ -110,9 +110,9 @@ function Invoke-vLCMRestMethod {
     # --- Set up default parmaeters
     $Params = @{
 
-        Method = $Method
+        Method  = $Method
         Headers = $Headers
-        Uri = $FullURI
+        Uri     = $FullURI
     }
 
     if ($PSBoundParameters.ContainsKey("Body")) {
@@ -122,7 +122,8 @@ function Invoke-vLCMRestMethod {
         # --- Log the payload being sent to the server
         Write-Debug -Message $Body
 
-    } elseif ($PSBoundParameters.ContainsKey("OutFile")) {
+    }
+    elseif ($PSBoundParameters.ContainsKey("OutFile")) {
 
         $Params.Add("OutFile", $OutFile)
 

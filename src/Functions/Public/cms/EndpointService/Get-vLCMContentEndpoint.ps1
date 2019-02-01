@@ -1,5 +1,5 @@
 function Get-vLCMContentEndpoint {
-<#
+    <#
     .SYNOPSIS
     Get content endpoints from vRealize Lifecycle Manager content management service
 
@@ -27,47 +27,47 @@ function Get-vLCMContentEndpoint {
     Get-vLCMContentEndpoint | ft
 
 #>
-[OutputType('System.Management.Automation.PSObject')]
+    [OutputType('System.Management.Automation.PSObject')]
 
     Param (
 
-      [Parameter(Mandatory=$false,ValueFromPipeline=$false)]
-      [ValidateSet("Orchestration","Automation","SourceControl","Operations")]
-      [String]$Category,
+        [Parameter(Mandatory = $false, ValueFromPipeline = $false)]
+        [ValidateSet("Orchestration", "Automation", "SourceControl", "Operations")]
+        [String]$Category,
 
-      [parameter(Mandatory=$false,ValueFromPipeline=$false)]
-      [ValidateNotNullOrEmpty()]
-      [String]$Limit = "100"
+        [parameter(Mandatory = $false, ValueFromPipeline = $false)]
+        [ValidateNotNullOrEmpty()]
+        [String]$Limit = "100"
 
     )
 
-    begin{
-      #Initialize
-      Write-Verbose -Message "Initializing..."
+    begin {
+        #Initialize
+        Write-Verbose -Message "Initializing..."
 
-      #Create PSObject for Output
-      function StandardOutput ($contentItem){
+        #Create PSObject for Output
+        function StandardOutput ($contentItem) {
 
-        [pscustomobject]@{
+            [pscustomobject]@{
 
-          Name          =   $contentItem.name
-          Category      =   $contentItem.category
-          Capture       =   $contentItem.supportCapture
-          Test          =   $contentItem.supportTest
-          Release       =   $contentItem.supportRelease
-          Id            =   ($contentItem.id).split('/')[5]
-          URL           =   $contentItem.id
-          Tags          =   $contentItem.tags
-          Messages      =   $contentItem.messages
+                Name     = $contentItem.name
+                Category = $contentItem.category
+                Capture  = $contentItem.supportCapture
+                Test     = $contentItem.supportTest
+                Release  = $contentItem.supportRelease
+                Id       = ($contentItem.id).split('/')[5]
+                URL      = $contentItem.id
+                Tags     = $contentItem.tags
+                Messages = $contentItem.messages
 
+            }
         }
-      }
     }
 
-    process{
+    process {
         try {
 
-            if($PSBoundParameters.ContainsKey('Category')){
+            if ($PSBoundParameters.ContainsKey('Category')) {
                 #URL for getting all Content Endpoints list by category
                 $contentUrl = "/cms/api/v1/endpoints?expands&limit=$($Limit)&category=$($Category)"
             }
@@ -82,25 +82,25 @@ function Get-vLCMContentEndpoint {
 
             # --- Initialise an empty array
             $ResponseObject = @()
-                #Loop over each Content Endpoint in the list and get detailed view to create new object
-                foreach ($item in $Response.sortedDocuments) {
+            #Loop over each Content Endpoint in the list and get detailed view to create new object
+            foreach ($item in $Response.sortedDocuments) {
 
-                    $ResponseObject += StandardOutput($item)
+                $ResponseObject += StandardOutput($item)
 
-                }
+            }
 
             # --- Return Contents
             return $ResponseObject
             break
 
         }
-        catch [Exception]{
+        catch [Exception] {
             throw
         }
-      }
-      end{
+    }
+    end {
 
-      }
+    }
 
 
 }

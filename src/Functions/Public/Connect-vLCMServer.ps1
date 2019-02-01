@@ -1,5 +1,5 @@
 function Connect-vLCMServer {
-<#
+    <#
     .SYNOPSIS
     Connect to a vLCM Server
 
@@ -42,30 +42,30 @@ function Connect-vLCMServer {
     $cred = Get-Credential
     Connect-vLCMServer -Server vlcmappliance01.domain.local -Credential $cred -IgnoreCertRequirements
 #>
-[CmdletBinding(DefaultParametersetName="Username")][OutputType('System.Management.Automation.PSObject')]
+    [CmdletBinding(DefaultParametersetName = "Username")][OutputType('System.Management.Automation.PSObject')]
 
     Param (
 
-        [parameter(Mandatory=$true)]
+        [parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [String]$Server,
 
-        [parameter(Mandatory=$true,ParameterSetName="Username")]
+        [parameter(Mandatory = $true, ParameterSetName = "Username")]
         [ValidateNotNullOrEmpty()]
         [String]$Username,
 
-        [parameter(Mandatory=$true,ParameterSetName="Username")]
+        [parameter(Mandatory = $true, ParameterSetName = "Username")]
         [ValidateNotNullOrEmpty()]
         [SecureString]$Password,
 
-        [Parameter(Mandatory=$true,ParameterSetName="Credential")]
+        [Parameter(Mandatory = $true, ParameterSetName = "Credential")]
         [ValidateNotNullOrEmpty()]
         [Management.Automation.PSCredential]$Credential,
 
-        [parameter(Mandatory=$false)]
+        [parameter(Mandatory = $false)]
         [Switch]$IgnoreCertRequirements,
 
-        [parameter(Mandatory=$false)]
+        [parameter(Mandatory = $false)]
         [ValidateSet('Ssl3', 'Tls', 'Tls11', 'Tls12')]
         [String]$SslProtocol
     )
@@ -73,7 +73,7 @@ function Connect-vLCMServer {
     # --- Handle untrusted certificates if necessary
     $SignedCertificates = $true
 
-    if ($PSBoundParameters.ContainsKey("IgnoreCertRequirements") ){
+    if ($PSBoundParameters.ContainsKey("IgnoreCertRequirements") ) {
 
         if (!$IsCoreCLR) {
 
@@ -102,12 +102,12 @@ function Connect-vLCMServer {
     # --- Security Protocol
     $SslProtocolResult = 'Default'
 
-    if ($PSBoundParameters.ContainsKey("SslProtocol") ){
+    if ($PSBoundParameters.ContainsKey("SslProtocol") ) {
 
         if (!$IsCoreCLR) {
 
             $CurrentProtocols = ([System.Net.ServicePointManager]::SecurityProtocol).toString() -split ', '
-            if (!($SslProtocol -in $CurrentProtocols)){
+            if (!($SslProtocol -in $CurrentProtocols)) {
 
                 [System.Net.ServicePointManager]::SecurityProtocol += [System.Net.SecurityProtocolType]::$($SslProtocol)
             }
@@ -116,13 +116,13 @@ function Connect-vLCMServer {
     }
 
     # --- Convert Secure Credentials to a format for sending in the JSON payload
-    if ($PSBoundParameters.ContainsKey("Credential")){
+    if ($PSBoundParameters.ContainsKey("Credential")) {
 
         $Username = $Credential.UserName
         $JSONPassword = $Credential.GetNetworkCredential().Password
     }
 
-    if ($PSBoundParameters.ContainsKey("Password")){
+    if ($PSBoundParameters.ContainsKey("Password")) {
 
         $JSONPassword = (New-Object System.Management.Automation.PSCredential("username", $Password)).GetNetworkCredential().Password
     }
@@ -137,13 +137,13 @@ function Connect-vLCMServer {
 
         $Params = @{
 
-            Method = "POST"
-            URI = "https://$($Server)/lcm/api/v1/login"
+            Method  = "POST"
+            URI     = "https://$($Server)/lcm/api/v1/login"
             Headers = @{
-                "Accept"="application/json";
+                "Accept"       = "application/json";
                 "Content-Type" = "application/json";
             }
-            Body = $JSON
+            Body    = $JSON
 
         }
 
@@ -164,15 +164,15 @@ function Connect-vLCMServer {
         # --- Create Output Object
         $Global:vLCMConnection = [PSCustomObject] @{
 
-            Server = "https://$($Server)"
-            Token = $Response.token
-            Username = $Username
+            Server             = "https://$($Server)"
+            Token              = $Response.token
+            Username           = $Username
             SignedCertificates = $SignedCertificates
-            SslProtocol = $SslProtocolResult
+            SslProtocol        = $SslProtocolResult
         }
 
     }
-    catch [Exception]{
+    catch [Exception] {
 
         throw
 
