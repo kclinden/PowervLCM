@@ -22,10 +22,10 @@ function Get-vLCMContentItem {
     System.Management.Automation.PSObject
 
     .EXAMPLE
-    Get-vLCMContent -Id 4e87ae12-75c8-4a8d-83ab-f02d30543a08
+    Get-vLCMContentItem -Id 4e87ae12-75c8-4a8d-83ab-f02d30543a08
 
     .EXAMPLE
-    Get-vLCMContent -PackageType Automation-CompositeBlueprint
+    Get-vLCMContentItem -PackageType Automation-CompositeBlueprint
 
 #>
 [OutputType('System.Management.Automation.PSObject')]
