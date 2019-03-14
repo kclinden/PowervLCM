@@ -1,6 +1,6 @@
 ﻿<#
 .DESCRIPTION
-This script will capture all compostite blueprints and their dependencies from a vRA Endpoint in LCM.
+This script will capture all content for a given time from a vRealize Lifecycle Manager Content Endpoint.
 
 .NOTES
 Procedures
