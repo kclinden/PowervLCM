@@ -25,7 +25,7 @@ param (
 
     [Parameter(Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
-    [String]$EndpointId,
+    [String]$EndpointId, #In a later version the EndpointID could be retreived dynamically from the content endpoint name or vice versa
 
     [Parameter(Mandatory = $true)]
     [ValidateNotNullOrEmpty()]
@@ -95,7 +95,17 @@ function captureContent {
 
 }
 
-function captureAllForType($CaptureType) {
+function captureAllForType {
+
+    Param (
+
+        [Parameter(Mandatory = $true)]
+        [String]$ContentType,
+
+        [Parameter(Mandatory = $true)]
+        [String]$EndpointId
+
+    )
 
     #Get the list of content for endpoint
     $content = getContentList -ContentType $ContentType -EndpointId $EndpointId
@@ -124,7 +134,7 @@ function checkRequestStatus($link) {
 ################################
 
 Connect-vLCMServer -Server $Server -Credential $Credential -SslProtocol Tls12
-$requestList = captureAllForType -ContentType $CaptureType #Capture All Content
+$requestList = captureAllForType -ContentType $CaptureType -EndpointId $EndpointId #Capture All Content
 
 #Check statuses until all are complete
 $complete = $false
