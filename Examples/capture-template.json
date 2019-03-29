@@ -6,7 +6,7 @@
   "test": false,
   "release": false,
   "enableUnitTests": null,
-  "includeDependencies": null,
+  "includeDependencies": true,
   "stopTestDeploymentOnFirstFailure": null,
   "stopReleaseDeploymentOnFirstFailure": null,
   "stopDeploymentOnFirstFailure": null,
